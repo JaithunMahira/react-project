@@ -1,15 +1,24 @@
 //Import React and ReactDOM libraries
 import React from "react";
 import ReactDOM from "react-dom";
-import CommentDetail from "./CommentDetail";
+import CommentDetail from "./Section3/CommentDetail";
 import faker from "faker";
-import ApprovalCard from "./ApprovalCard";
+import ApprovalCard from "./Section3/ApprovalCard";
+import SeasonDisplay from "./Section4/SeasonDisplay";
+import Spinner from "./Section4/Spinner";
 
 //Create a React Component
 const App = () => {
   //diff in jsx and html 1. styling prop 2. className 3. referencing Js variables 4. htmlFor
   const labelText = "Enter Name :";
   const buttonText = { text: "Click Me!" };
+
+  //Section 4 Class Components - geolocation - cannot load data and display in functional components
+  window.navigator.geolocation.getCurrentPosition(
+    (position) => console.log(position),
+    (err) => console.log(err)
+  );
+
   return (
     <body>
       {/* Section 1 and 2*/}
@@ -22,7 +31,6 @@ const App = () => {
           {buttonText.text}
         </button>
       </div>
-
       {/*Section 3 - loading comments 1. Added faker to load data 2. Added
       semantic.min.css for css styling 3. Added CommentDetail.js/ Components
       Nesting */}
@@ -57,6 +65,40 @@ const App = () => {
     </body>
   );
 };
+
+//Class Component - section 4
+class App extends React.Component {
+  // constructor(props) {
+  //   super(props);
+
+  //   //this is the only time direct assignment can be done
+  //   this.state = { lat: null, errorMessage: "" };
+  // }
+
+  //Alternate way to initialize state
+  state = { lat: null, errorMessage: "" };
+
+  componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => this.setState({ lat: position.coords.latitude }),
+      (err) => this.setState({ errorMessage: err.message })
+    );
+  }
+
+  renderContent() {
+    if (!this.state.lat && this.state.errorMessage) {
+      return <div> Error : {this.state.errorMessage}</div>;
+    }
+    if (!this.state.errorMessage && this.state.lat) {
+      return <SeasonDisplay lat={this.state.lat} />;
+    }
+    return <Spinner message="Please accept the location access request!" />;
+  }
+
+  render() {
+    return <div className="border red">{this.renderContent()}</div>;
+  }
+}
 
 //Take the react Component and show it in screen
 ReactDOM.render(<App />, document.querySelector("#root"));
