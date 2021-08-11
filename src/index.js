@@ -8,6 +8,7 @@ import SeasonDisplay from "./Section4/SeasonDisplay";
 import Spinner from "./Section4/Spinner";
 import App from "./Section7/components/App";
 
+import App from "./Section12/App.js";
 //Create a React Component
 const App = () => {
   //diff in jsx and html 1. styling prop 2. className 3. referencing Js variables 4. htmlFor
