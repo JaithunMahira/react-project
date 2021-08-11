@@ -1,11 +1,12 @@
 //Import React and ReactDOM libraries
 import React from "react";
 import ReactDOM from "react-dom";
-import CommentDetail from "./Section3/CommentDetail";
 import faker from "faker";
+import CommentDetail from "./Section3/CommentDetail";
 import ApprovalCard from "./Section3/ApprovalCard";
 import SeasonDisplay from "./Section4/SeasonDisplay";
 import Spinner from "./Section4/Spinner";
+import App from "./Section7/components/App";
 
 //Create a React Component
 const App = () => {
@@ -99,6 +100,8 @@ class App extends React.Component {
     return <div className="border red">{this.renderContent()}</div>;
   }
 }
+
+//section7 - Imported App component from App.js
 
 //Take the react Component and show it in screen
 ReactDOM.render(<App />, document.querySelector("#root"));
