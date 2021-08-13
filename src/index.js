@@ -8,12 +8,15 @@ import SeasonDisplay from "./Section4/SeasonDisplay";
 import Spinner from "./Section4/Spinner";
 import App from "./Section7/components/App";
 import App from "./Section17/App";
-import App from "./Section12/App.js";
+import App from "./Section12/App";
 
+import App from "./Section18/App";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 
 import reducers from "./Section17/reducers";
+import reducers from "./Section18/reducers";
+import thunk from "redux-thunk";
 //Create a React Component
 const App = () => {
   //diff in jsx and html 1. styling prop 2. className 3. referencing Js variables 4. htmlFor
@@ -109,9 +112,20 @@ class App extends React.Component {
 
 //section7 - Imported App component from App.js
 
+//section 18
+const store = createStore(reducers, applyMiddleware(thunk));
+
 //Take the react Component and show it in screen
+
 ReactDOM.render(
-  <Provider store={createStore(reducers)}>
+  //secction17
+  // <Provider store={createStore(reducers)}>
+  //   <App />
+  // </Provider>
+
+  //section18
+
+  <Provider store={store}>
     <App />
   </Provider>,
   document.querySelector("#root")
