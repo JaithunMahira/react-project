@@ -11,6 +11,7 @@ import App from "./Section17/App";
 import App from "./Section12/App";
 
 import App from "./Section18/App";
+import App from "./Section27/components/App";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
@@ -119,14 +120,17 @@ const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(
   //secction17
-  // <Provider store={createStore(reducers)}>
-  //   <App />
-  // </Provider>
+  <Provider store={createStore(reducers)}>
+    <App />
+  </Provider>
 
-  //section18
+  // section18
 
   <Provider store={store}>
     <App />
-  </Provider>,
+  </Provider>
+
+  //Section27
+  <App />,
   document.querySelector("#root")
 );
